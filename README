@@ -1,0 +1,10 @@
+This is a occupancy grid map used for avoidance obstacle
+
+target :
+
+1. occupancy grid map
+
+2. obstacle avoidance algorithm: VFF, VFH, VFH*
+
+3. visulize steer rate and speed rate
+
