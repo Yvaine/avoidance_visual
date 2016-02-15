@@ -1,7 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 
-#include "GridMap.h"
+#include "GridMap.hpp"
 #include "Common.hpp"
 #include "BasicVFF.hpp"
 

@@ -1,4 +1,4 @@
-#include "GridMap.h"
+#include "GridMap.hpp"
 //#include "Common.hpp"
 using namespace std;
 using namespace cv;
