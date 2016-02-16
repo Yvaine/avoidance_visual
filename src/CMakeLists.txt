@@ -1,11 +1,20 @@
 FIND_PACKAGE(OpenCV REQUIRED)
 
-ADD_EXECUTABLE(main
-    main.cpp
+SET(SRC_LIST
     GridMap.cpp
     BasicVFF.cpp
 )
-TARGET_LINK_LIBRARIES(main 
+ADD_LIBRARY(avoidance SHARED ${SRC_LIST})
+ADD_LIBRARY(avoidance_static STATIC ${SRC_LIST})
+
+IF(WIN32)
+TARGET_LINK_LIBRARIES(avoidance
     ${OpenCV_LIBS}
 )
+ELSE(WIN32)
+TARGET_LINK_LIBRARIES(avoidance
+    ${OpenCV_LIBS}
+)
+ENDIF(WIN32)
+
 
