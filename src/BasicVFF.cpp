@@ -118,7 +118,7 @@ float BasicVFF::rad2degree(float rad)
 void BasicVFF::calcDirection()
 {
     direction = forceSum / getDistance(forceSum);
-    cout << direction.x << " " << direction.y << endl;
+    cout << "forcesum direction: " << direction.x << " " << direction.y << endl;
 }
 
 void BasicVFF::calcAngle()

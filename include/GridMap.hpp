@@ -13,14 +13,16 @@ class GridMap {
         GridMap(float resolutionx, float resolutiony,
                 float mapx, float mapy);
         GridMap(Resolution2f &resolution, Map2f &map);
-        void updateMap();
+        void updateMap(int i);
         ~GridMap();
 
         void showMap();
 
         void getPositionFromIndex(const Cell2i &index, Position2f &pos) const;
+        void getIndexFromPosition(const Position2f &pos, Cell2i &index) const;
 
         void setObstacle(const Cell2i &index_topleft, const Cell2i &index_rightbottom);
+        void setObstaclePosition(const Position2f &position_topleft, const Position2f &position_rightbottom);
 
         Cell2i getMapSize() const;
 

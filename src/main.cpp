@@ -44,9 +44,9 @@ int main(int argc, char *argv[])
     basicVFF.calcSteerRate();
 #endif
 
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 2; i++)
     {
-        map.updateMap();
+        map.updateMap(i);
         map.showMap();
         basicVFF.run(map);
         basicVFF.update();

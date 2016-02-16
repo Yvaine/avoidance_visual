@@ -67,6 +67,13 @@ public:
         remainder.y = numerator.y + denominator.y;
         return remainder;
     }
+    friend array operator-(const array<T> &numerator, const array<T> &denominator)
+    {
+        array<T> remainder;
+        remainder.x = numerator.x - denominator.x;
+        remainder.y = numerator.y - denominator.y;
+        return remainder;
+    }
 
 };
 
