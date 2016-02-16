@@ -18,11 +18,14 @@ int main(int argc, char *argv[])
 #if 0
     cout << "Map size " << map.getMapSize().x << " " << map.getMapSize().y << endl;
 
-    Cell2i index(20,20);
+    Cell2i index(40,40), index2;
     Position2f position;
     map.getPositionFromIndex(index, position);
 
-    cout << "index = " << index.x << "," << index.y << " position = " << position.x << ", " << position.y << endl;
+    map.getIndexFromPosition(position, index2);
+
+    cout << "index = " << index.x << " " << index.y << ", position = " << position.x << ", " << position.y << endl;
+    cout << "index2 = " << index2.x << " " << index2.y << endl;
 #endif
 
 
@@ -43,7 +46,7 @@ int main(int argc, char *argv[])
     basicVFF.calcAngle();
     basicVFF.calcSteerRate();
 #endif
-
+#if 1
     for(int i = 0; i < 2; i++)
     {
         map.updateMap(i);
@@ -51,7 +54,7 @@ int main(int argc, char *argv[])
         basicVFF.run(map);
         basicVFF.update();
     }
-
+#endif
     cout << "end" << endl;
     return 0;
 }

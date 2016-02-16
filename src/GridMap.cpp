@@ -92,14 +92,14 @@ void GridMap::updateMap(int i)
 
 void GridMap::getPositionFromIndex(const Cell2i &index, Position2f &pos) const
 {
-    pos = array<float>((float)index.y, -(float)index.x) * resolution_ + offset_;
+    pos = array<float>((float)index.x, -(float)index.y) * resolution_ + offset_;
 
 }
 
 void GridMap::getIndexFromPosition(const Position2f &pos, Cell2i &index) const
 {
     array<float> index_tmp = (pos - offset_ ) / resolution_;
-    index = Cell2i(static_cast<int>(-index_tmp.y), static_cast<int>(index_tmp.x));
+    index = Cell2i(static_cast<int>(index_tmp.x), static_cast<int>(-index_tmp.y));
 }
 
 void GridMap::setObstacle(const Cell2i &index_topleft, const Cell2i &index_rightbottom)

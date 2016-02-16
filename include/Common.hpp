@@ -8,8 +8,13 @@ public:
     T x;
     T y;
 
+    int row;
+    int col;
+
     array(void)
     {
+        x = 0;
+        y = 0;
     }
 
     array(T x, T y){ this->x = x; this->y = y; }
