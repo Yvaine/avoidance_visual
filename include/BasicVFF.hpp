@@ -51,6 +51,8 @@ class BasicVFF
         float Ks;
         float steer_rate;
 
+	float delta_time;
+
 };
 
 

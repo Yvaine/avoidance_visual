@@ -151,6 +151,7 @@ void BasicVFF::run(const GridMap & map)
 void BasicVFF::update()
 {
     //cur_angle = angle;
+    cur_angle += steer_rate * delta_time;
     forceSum = force2f(0,0);
 }
 
