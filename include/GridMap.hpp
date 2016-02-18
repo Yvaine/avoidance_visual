@@ -16,7 +16,7 @@ class GridMap {
         void updateMap(int i);
         ~GridMap();
 
-        void showMap();
+        void showMap(const char *windowname);
 
         void getPositionFromIndex(const Cell2i &index, Position2f &pos) const;
         void getIndexFromPosition(const Position2f &pos, Cell2i &index) const;

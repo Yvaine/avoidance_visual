@@ -63,20 +63,20 @@ GridMap::~GridMap()
 
 }
 
-void GridMap::showMap()
+void GridMap::showMap(const char *windowname)
 {
-    cv::namedWindow("occupancyGridMap", CV_WINDOW_KEEPRATIO);
-    cv::imshow("occupancyGridMap", occupancyGirdMap);
-    cv::waitKey(0);
+    
+    cv::imshow(windowname, occupancyGirdMap);
+	
 
-    cv::imwrite("../bin/occupancyGridMap.jpg", occupancyGirdMap);
+    //cv::imwrite("../bin/occupancyGridMap.jpg", occupancyGirdMap);
 }
 
 void GridMap::updateMap(int i)
 {
     memset(occupancyGirdMap.data, 0, sizeof(occupancyGirdMap.data));
     Cell2i obstacle_lefttop(0, 0);
-    Cell2i obstacle_rightbottom(2, 2);
+    Cell2i obstacle_rightbottom(20, 20);
     if(i == 0){
         setObstacle(obstacle_lefttop, obstacle_rightbottom);
     }

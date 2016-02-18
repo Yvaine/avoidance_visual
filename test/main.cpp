@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     //GridMap map(1, 1, 400, 400);
     Resolution2f r(1, 1);
-    Map2f m(40,40);
+    Map2f m(400,400);
 
     GridMap map(r, m);
 #if 0
@@ -47,14 +47,17 @@ int main(int argc, char *argv[])
     basicVFF.calcSteerRate();
 #endif
 #if 1
+	string windowname = "occupancyGridMap";
+	cv::namedWindow(windowname.c_str(), CV_WINDOW_KEEPRATIO);
     for(int i = 0; i < 2; i++)
     {
         map.updateMap(i);
-        map.showMap();
+        map.showMap(windowname.c_str());
         basicVFF.run(map);
         basicVFF.update();
     }
 #endif
+	cv::waitKey(0);
     cout << "end" << endl;
     return 0;
 }

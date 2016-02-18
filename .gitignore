@@ -4,6 +4,7 @@
 *.hpp~
 *.cpp~
 *.txt~
+.gitignore~
 /bin
 /build
 /lib
