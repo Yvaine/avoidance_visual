@@ -27,14 +27,16 @@ public:
 
     array &operator=(const array<T> &other)
     {
-        x = other.x;
-        y = other.y;
+        this->x = other.x;
+        this->y = other.y;
+		return *this;
     }
 
     array &operator+=(const array<T> &other)
     {
-        x += other.x;
-        y += other.y;
+        this->x += other.x;
+        this->y += other.y;
+		return *this;
     }
 
     friend array operator/(const array<T> &numerator, const array<T> &denominator)

@@ -1,0 +1,10 @@
+*.un~
+*.txt~
+*.swp
+*.hpp~
+*.cpp~
+*.txt~
+/bin
+/build
+/lib
+*.~

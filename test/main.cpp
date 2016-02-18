@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     Map2f m(40,40);
 
     GridMap map(r, m);
-#if 1
+#if 0
     cout << "Map size " << map.getMapSize().x << " " << map.getMapSize().y << endl;
 
     Cell2i index(70,60), index2;
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     basicVFF.calcAngle();
     basicVFF.calcSteerRate();
 #endif
-#if 0
+#if 1
     for(int i = 0; i < 2; i++)
     {
         map.updateMap(i);
