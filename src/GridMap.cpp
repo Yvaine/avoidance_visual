@@ -20,7 +20,7 @@ GridMap::GridMap(float resolutionx, float resolutiony,
     CellY = mapY / resolutionY;
 
     cout << CellX  << " " << CellY << endl;
-    occupancyGirdMap = cv::Mat(CellX, CellY, CV_8UC1);
+    occupancyGridMap = cv::Mat(CellX, CellY, CV_8UC1);
 
 }
 #else
@@ -35,7 +35,7 @@ GridMap::GridMap(Resolution2f &resolution, Map2f &map)
     CellY = map.y / resolutionY;
 
     cout << CellX  << " " << CellY << endl;
-    occupancyGirdMap = cv::Mat(CellX, CellY, CV_8UC1);
+    occupancyGridMap = cv::Mat(CellX, CellY, CV_8UC1);
 #else
     resolution_ = resolution;
     map_ = map;
@@ -49,32 +49,43 @@ GridMap::GridMap(Resolution2f &resolution, Map2f &map)
     offset_.x = -map_.x / 2;
     offset_.y = map_.y / 2;
 
-    occupancyGirdMap = cv::Mat(cell_.x, cell_.y, CV_8UC1, Scalar::all(0));
-
-
-
-
+    //occupancyGridMap = cv::Mat(cell_.x, cell_.y, CV_8UC1, Scalar::all(0));
+	
+	occupancyGridMap = new uchar[cell_.x * cell_.y];
+	setOccupancyGridValue(0);
 #endif
 
 }
 #endif
 GridMap::~GridMap()
 {
+	delete[]occupancyGridMap;
 
 }
 
 void GridMap::showMap(const char *windowname)
 {
-    
-    cv::imshow(windowname, occupancyGirdMap);
+	cv::Mat showGridMap = cv::Mat(cell_.x, cell_.y, CV_8UC1, Scalar::all(255));
+	int index = 0;
+	for (int i = 0; i < cell_.y; i++)
+	{
+		for (int j = 0; j < cell_.x; j++)
+		{
+			index = getIndex(i, j);
+			showGridMap.at<uchar>(i,j) = 255 - occupancyGridMap[index];
+		}
+	}
+	//cout << "index : " << index << endl;
+    cv::imshow(windowname, showGridMap);
 	
 
-    //cv::imwrite("../bin/occupancyGridMap.jpg", occupancyGirdMap);
+    cv::imwrite("../bin/occupancyGridMap.jpg", showGridMap);
 }
 
 void GridMap::updateMap(int i)
 {
-    memset(occupancyGirdMap.data, 0, sizeof(occupancyGirdMap.data));
+    //memset(occupancyGridMap.data, 1, sizeof(occupancyGirdMap.data));
+	setOccupancyGridValue(0);
     Cell2i obstacle_lefttop(0, 0);
     Cell2i obstacle_rightbottom(20, 20);
     if(i == 0){
@@ -109,8 +120,9 @@ void GridMap::setObstacle(const Cell2i &index_topleft, const Cell2i &index_right
 
         for(int j = index_topleft.x; j < index_rightbottom.x; j++)
         {
-            occupancyGirdMap.at<uchar>(i,j) = 255;
-
+            //occupancyGridMap.at<uchar>(i,j) = 255;
+			int index = getIndex(i, j);
+			occupancyGridMap[index] = 255;
         }
     }
 }
@@ -130,7 +142,24 @@ Cell2i GridMap::getMapSize() const
      return cell_;
 }
 
-Mat GridMap::getOccupancyGridMap() const
+uchar *GridMap::getOccupancyGridMap() const
 {
-    return occupancyGirdMap;
+    return occupancyGridMap;
+}
+
+void GridMap::setOccupancyGridValue(uchar value)
+{
+	for(int i = 0; i < cell_.y; i++)
+	{
+		for(int j = 0; j < cell_.x; j++)
+		{
+			int index = getIndex(i, j);
+			occupancyGridMap[index] = value;
+		}
+	}
+}
+
+int GridMap::getIndex(int i, int j)
+{
+	return i * cell_.y + j;
 }

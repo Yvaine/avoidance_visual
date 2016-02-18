@@ -25,7 +25,7 @@ void BasicVFF::calcDistanceVecArray(const GridMap &map)
     {
         for(int j = 0; j < map.getMapSize().x; j++)
         {
-            if(map.getOccupancyGridMap().at<uchar>(i,j) > 0)
+			if (map.getOccupancyGridMap()[i * map.getMapSize().x + j] > 0)
             {
                 Position2f ObstaclePos;
                 map.getPositionFromIndex(Cell2i(i,j), ObstaclePos);
@@ -46,7 +46,7 @@ void BasicVFF::calcRepulsiveForceArray(const GridMap &map)
     {
         for(int j = 0; j < map.getMapSize().x; j++)
         {
-            uchar occupancyData = map.getOccupancyGridMap().at<uchar>(i,j);
+			uchar occupancyData = map.getOccupancyGridMap()[i * map.getMapSize().x + j];
             if(occupancyData > 0)
             {
                 Position2f ObstaclePos;
@@ -76,7 +76,7 @@ void BasicVFF::calcRepulsiveForceSum(const GridMap &map)
     {
         for(int j = 0; j < map.getMapSize().x; j++)
         {
-            uchar occupancyData = map.getOccupancyGridMap().at<uchar>(i,j);
+			uchar occupancyData = map.getOccupancyGridMap()[i * map.getMapSize().x + j];
             if(occupancyData > 0)
             {
                 Position2f ObstaclePos;

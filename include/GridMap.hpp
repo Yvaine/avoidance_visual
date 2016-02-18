@@ -26,8 +26,11 @@ class GridMap {
 
         Cell2i getMapSize() const;
 
-        Mat getOccupancyGridMap() const;
+        uchar *getOccupancyGridMap() const;
 
+		void setOccupancyGridValue(uchar value);
+
+		int getIndex(int i, int j);
 
 
     private:
@@ -45,7 +48,7 @@ class GridMap {
         Map2f map_;
         Cell2i cell_;
 
-        Mat occupancyGirdMap;
+        uchar *occupancyGridMap;
 
         int currentIndexX;
         int currentIndexY;

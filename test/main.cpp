@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     //GridMap map(1, 1, 400, 400);
     Resolution2f r(1, 1);
-    Map2f m(400,400);
+    Map2f m(40,40);
 
     GridMap map(r, m);
 #if 0
