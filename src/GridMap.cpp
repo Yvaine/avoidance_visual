@@ -85,6 +85,7 @@ void GridMap::showMap(const char *windowname)
 void GridMap::updateMap(int i)
 {
     //memset(occupancyGridMap.data, 1, sizeof(occupancyGirdMap.data));
+#if 0
 	setOccupancyGridValue(0);
     Cell2i obstacle_lefttop(0, 0);
     Cell2i obstacle_rightbottom(20, 20);
@@ -99,6 +100,9 @@ void GridMap::updateMap(int i)
 
         setObstaclePosition(pos_lefttop, pos_rightbottom);
     }
+#else
+
+#endif
 }
 
 void GridMap::getPositionFromIndex(const Cell2i &index, Position2f &pos) const
