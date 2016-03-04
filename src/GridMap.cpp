@@ -5,7 +5,7 @@ using namespace cv;
 
 GridMap::GridMap()
 {
-    cell_ = Cell2i(0,0);
+    cell = Cell2i(0,0);
 
 }
 #if 0
@@ -24,37 +24,22 @@ GridMap::GridMap(float resolutionx, float resolutiony,
 
 }
 #else
-GridMap::GridMap(Resolution2f &resolution, Map2f &map)
+GridMap::GridMap(float resolution, Cell2i &cell)
 {
-#if 0
-    resolutionX = resolution.x;
-    resolutionY = resolution.y;
-    mapX = map.x;
-    mapY = map.y;
-    CellX = map.x / resolutionX;
-    CellY = map.y / resolutionY;
+    this->resolution = resolution;
 
-    cout << CellX  << " " << CellY << endl;
-    occupancyGirdMap = cv::Mat(CellX, CellY, CV_8UC1);
-#else
-    resolution_ = resolution;
-    map_ = map;
-    array<float> cellf = map_ / resolution_;
+    cell = cell;
+    width = cell.x * resolution;
+    height = cell.y * resolution;
 
-    //cout << cellf.x << " " << cellf.y << endl;
+    mapSize = Map2f(width, height);
 
-    cell_.x = int(cellf.x);
-    cell_.y = int(cellf.y);
+    //cout << cell.x << " " << cell.y << endl;
 
-    offset_.x = -map_.x / 2;
-    offset_.y = map_.y / 2;
+    row = cell.y;
+    col = cell.x;
 
-    occupancyGirdMap = cv::Mat(cell_.x, cell_.y, CV_8UC1, Scalar::all(0));
-
-
-
-
-#endif
+    occupancyGirdMap = cv::Mat(cell.x, cell.y, CV_8UC1, Scalar::all(0));
 
 }
 #endif
@@ -71,7 +56,7 @@ void GridMap::showMap()
 
     cv::imwrite("../bin/occupancyGridMap.jpg", occupancyGirdMap);
 }
-
+#if 0
 void GridMap::updateMap(int i)
 {
     memset(occupancyGirdMap.data, 0, sizeof(occupancyGirdMap.data));
@@ -89,18 +74,33 @@ void GridMap::updateMap(int i)
         setObstaclePosition(pos_lefttop, pos_rightbottom);
     }
 }
-
+#endif
+#if 0
 void GridMap::getPositionFromIndex(const Cell2i &index, Position2f &pos) const
 {
     pos = array<float>((float)index.x, -(float)index.y) * resolution_ + offset_;
 
 }
+#endif
 
+void GridMap::getPositionFromIndex(int x, int y, Position2f &pos) const
+{
+	pos.x = x * resolution - width / 2.0f + resolution / 2.0f;
+	pos.y = height - (y + 1) * resolution + resolution / 2.0f;
+}
+
+void GridMap::getIndexFromPosition(const Position2f &pos, Cell2i &index) const
+{
+    index.x = floor(pos.x / resolution)  + col / 2.0f ;
+	index.y = row - ceil(min(pos.y , height)/ resolution);
+}
+#if 0
 void GridMap::getIndexFromPosition(const Position2f &pos, Cell2i &index) const
 {
     array<float> index_tmp = (pos - offset_ ) / resolution_;
     index = Cell2i(static_cast<int>(index_tmp.x), static_cast<int>(-index_tmp.y));
 }
+#endif
 
 void GridMap::setObstacle(const Cell2i &index_topleft, const Cell2i &index_rightbottom)
 {
@@ -125,9 +125,9 @@ void GridMap::setObstaclePosition(const Position2f &position_topleft, const Posi
 
 }
 
-Cell2i GridMap::getMapSize() const
+Map2f GridMap::getMapSize() const
 {
-     return cell_;
+    return mapSize;
 }
 
 Mat GridMap::getOccupancyGridMap() const

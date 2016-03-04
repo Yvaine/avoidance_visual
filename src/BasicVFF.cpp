@@ -28,7 +28,7 @@ void BasicVFF::calcDistanceVecArray(const GridMap &map)
             if(map.getOccupancyGridMap().at<uchar>(i,j) > 0)
             {
                 Position2f ObstaclePos;
-                map.getPositionFromIndex(Cell2i(i,j), ObstaclePos);
+                map.getPositionFromIndex(j,i, ObstaclePos);
                 cout << i << " " << j << endl;
                 cout << ObstaclePos.x << " " << ObstaclePos.y << endl;
                 distance_vec_array.push_back(ObstaclePos);
@@ -50,7 +50,7 @@ void BasicVFF::calcRepulsiveForceArray(const GridMap &map)
             if(occupancyData > 0)
             {
                 Position2f ObstaclePos;
-                map.getPositionFromIndex(Cell2i(i,j), ObstaclePos);
+                map.getPositionFromIndex(j,i, ObstaclePos);
                 cout << i << " " << j << endl;
                 cout << ObstaclePos.x << " " << ObstaclePos.y << endl;
                 float distancePow = getDistancePow(ObstaclePos);
@@ -80,7 +80,7 @@ void BasicVFF::calcRepulsiveForceSum(const GridMap &map)
             if(occupancyData > 0)
             {
                 Position2f ObstaclePos;
-                map.getPositionFromIndex(Cell2i(i,j), ObstaclePos);
+                map.getPositionFromIndex(j,i, ObstaclePos);
                 //cout << i << " " << j << endl;
                 //cout << ObstaclePos.x << " " << ObstaclePos.y << endl;
                 float distancePow = getDistancePow(ObstaclePos);

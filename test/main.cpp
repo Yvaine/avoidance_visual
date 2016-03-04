@@ -11,20 +11,23 @@ int main(int argc, char *argv[])
 {
 
     //GridMap map(1, 1, 400, 400);
-    Resolution2f r(1, 1);
-    Map2f m(40,40);
+    Resolution2f r(0.1, 0.1);
+    Cell2i m(50,30);
+    float res = 0.1;
 
-    GridMap map(r, m);
+    GridMap map(res, m);
 #if 1
     cout << "Map size " << map.getMapSize().x << " " << map.getMapSize().y << endl;
 
-    Cell2i index(70,60), index2;
+    Cell2i index(49,29), index2;
     Position2f position;
-    map.getPositionFromIndex(index, position);
+    cout << "index = " << index.x << " " << index.y << endl;
+
+    map.getPositionFromIndex(index.x, index.y, position);
+    cout << "position " << position.x << " " << position.y << endl;
 
     map.getIndexFromPosition(position, index2);
 
-    cout << "index = " << index.x << " " << index.y << ", position = " << position.x << ", " << position.y << endl;
     cout << "index2 = " << index2.x << " " << index2.y << endl;
 #endif
 
