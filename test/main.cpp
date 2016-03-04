@@ -29,6 +29,11 @@ int main(int argc, char *argv[])
     map.getIndexFromPosition(position, index2);
 
     cout << "index2 = " << index2.x << " " << index2.y << endl;
+
+    float heading;
+    Position2f pos(2,-4);
+    map.calcHeading(pos, heading);
+    cout << "heading is " <<  heading * 180 / 3.1415926<<" degree" << endl;
 #endif
 
 

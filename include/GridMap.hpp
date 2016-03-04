@@ -28,6 +28,7 @@ class GridMap {
 
         Mat getOccupancyGridMap() const;
 
+        void calcHeading(Position2f &pos, float &heading);
 
 
     private:
