@@ -61,14 +61,11 @@ void VFH::calcValley(float *POD, std::map<int,float> &valley)
 }
 
 //step3 : calcOptimal direction
-void VFH::calcOptimal(std::map<int, float> &valley, float &optimalK)
+void VFH::calcOptimal(std::map<int, float> &valley, vector<int> &candidate_sector)
 {
     std::map<int, float>::iterator it;
-    vector<int> candidate_sector;
-    int index = 0;
     for(it = Valley.begin(); it != valley.end(); it++)
     {
-        index++;
         int it_cur = it->first;
         int it_tmp = (it+1)->first;
         if( (it_cur + 1) == it_tmp)
@@ -84,13 +81,19 @@ void VFH::calcOptimal(std::map<int, float> &valley, float &optimalK)
                 candidate_sector.push_back(middle);
             }
             s_count = 0;
-
             it_start = it_tmp;
         }
-
     }
 }
 
+//Step4 : calcOptimalK()
+void VFH::calcOptimalK(vector<int> &candidate_sector, int &K)
+{
+    for(int i = 0; i < candidate_sector.size(); i++)
+    {
+        if(abs(candidate_sector[i]))
 
+    }
+}
 
 
