@@ -100,8 +100,6 @@ void GridMap::calcHeading(Position2f &pos, float &heading)
     float angle_rad = atan2(pos.y, pos.x);
     cout << angle_rad << endl;
     heading = angle_rad - 3.1415926 / 2;
-
-
 #if 1
     if(heading < -PI)
         heading += 2 * PI;
