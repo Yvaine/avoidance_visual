@@ -95,6 +95,16 @@ typedef array<float> force2f;
 
 
 #define PI 3.1415926
+#define VFH
+
+#ifdef VFH
+const float ALPHA  = static_cast<const float>(5 * PI / 180);// 5 degree
+const int SECTOR_NUM = static_cast<const int>(2 * PI / ALPHA);
+const int S_MAX = 18;
+const int A = 1;
+const int B = 1;
+const int C = 1;
+#endif
 
 
 

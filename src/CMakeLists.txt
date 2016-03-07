@@ -1,8 +1,9 @@
 FIND_PACKAGE(OpenCV REQUIRED)
 
 SET(SRC_LIST
-    GridMap.cpp
-    BasicVFF.cpp
+    gridmap.cpp
+    #BasicVFF.cpp
+    BasicVFH.cpp
 )
 ADD_LIBRARY(avoidance SHARED ${SRC_LIST})
 ADD_LIBRARY(avoidance_static STATIC ${SRC_LIST})

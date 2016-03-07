@@ -2,7 +2,7 @@
 #define BASIC_VFF_H
 
 #include "Common.hpp"
-#include "GridMap.hpp"
+#include "gridmap.h"
 #include "vector"
 
 using namespace std;
